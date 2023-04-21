@@ -1,17 +1,19 @@
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { Configuration, OpenAIApi } from "openai";
-import { Client, GatewayIntentBits } from "discord.js";
+import { GatewayIntentBits, Collection } from "discord.js";
 import { defaultMode } from "./configuration/modes";
+import MyClient from "./utils/Client";
 dotenv.config();
 
 // Discord connection
-const client = new Client({
+const client = new MyClient({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
   ],
 });
+client.commands = new Collection();
 
 // OpenAI API connection
 const configuration = new Configuration({
