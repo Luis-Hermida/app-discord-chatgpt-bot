@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { Configuration, OpenAIApi } from "openai";
-import { GatewayIntentBits, Collection } from "discord.js";
+import { GatewayIntentBits, Collection, Message } from "discord.js";
 import { defaultMode } from "./configuration/modes";
 import MyClient from "./utils/Client";
 dotenv.config();
@@ -42,7 +42,7 @@ client.on("messageCreate", async function (message) {
 });
 
 // Handle Completition AI
-const openAICompletion = async (message: any, content: string) => {
+const openAICompletion = async (message: Message, content: string) => {
   try {
     const response = await openai.createCompletion({
       prompt: content,
